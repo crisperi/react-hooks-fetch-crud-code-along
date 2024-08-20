@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
-function ItemForm({onAddItem}) {
+function ItemForm({ onAddItem }) {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("Produce");
 
-const handleSubmit=(e)=>{
-  e.preventDefault();
+function handleSubmit(e){
+  e.preventDefault()
    const itemData ={name: name,
     category: category,
     isInCart: false,}
@@ -17,7 +17,7 @@ const handleSubmit=(e)=>{
       },body: JSON.stringify(itemData),
     })
     .then(r=>r.json())
-    .then((newItem)=> onAddItem(newItem))
+    .then((newItem)=>onAddItem(newItem))
     
 }
 
@@ -30,8 +30,8 @@ const handleSubmit=(e)=>{
       <label>
         Name:
         <input
-          type="text"
           name="name"
+          type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />

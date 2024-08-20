@@ -10,13 +10,14 @@ useEffect(()=>{
 
   fetch("http://localhost:4000/items")
   .then(resp=>resp.json())
-  .then(data=>setItems(()=>[...data]))
+  .then(data=>setItems([...data]))
 
 },[])
 
 
 function handleAddItem (newItem) {
-setItems(()=>[...items,newItem])
+  console.log("Adding new item:", newItem);
+  setItems((currentItems)=>[...currentItems,newItem])
 }
 
 
@@ -49,7 +50,7 @@ setItems(()=>[...items,newItem])
 
   return (
     <div className="ShoppingList">
-      <ItemForm />
+      <ItemForm onAddItem ={handleAddItem} />
       <Filter
         category={selectedCategory}
         onCategoryChange={handleCategoryChange}
@@ -57,8 +58,8 @@ setItems(()=>[...items,newItem])
       <ul className="Items">
         {itemsToDisplay.map((item) => (
           <Item key={item.id} item={item}
-           onAddItem={handleAddItem} onUpdateItem={handleUpdateItem}
-           onDeleteiTEM={handleDeleteItem}
+           onUpdateItem={handleUpdateItem}
+           onDeleteItem={handleDeleteItem}
            />
           
         ))}
